@@ -73,13 +73,4 @@ mclust_est$parameters$mean
 
 
 
-chatgpt::ask_chatgpt()
-
-library(chatgpt)
-
-gpt_get_completions(
-  prompt,
-  openai_api_key = Sys.getenv("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"),
-  messages = NULL
-)
 Sys.setenv(OPENAI_API_KEY = "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")
