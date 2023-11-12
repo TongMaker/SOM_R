@@ -20,7 +20,7 @@ sample_split<-function(samples, num_split){
 
 
 
-#function of SOM Algorithm
+#function of SOM Algorithm.
 SOM_BASIC<-function(samples, gridsom, cluster, eta, sigma0, weight=NULL){
   gridnum<-ncol(gridsom)
   dimension<-ncol(samples)
