@@ -70,7 +70,7 @@ library(mclust)
 
 mclust_est<-mclust::Mclust(centroid, G=6)
 mclust_est$parameters$mean
-
+a<-1
 
 
 Sys.setenv(OPENAI_API_KEY = "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")
