@@ -2,7 +2,7 @@ source("/Users/tongzhou/Library/Mobile Documents/com~apple~CloudDocs/Desktop/PHD
 library(tidyverse)
 library(kohonen)
 library(MASS)
-
+#
 ProbByNode_AllSom_K<-list()
 ProbByNode_Total_K<-list()
 Prob_AllSom_K<-list()
