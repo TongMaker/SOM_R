@@ -48,14 +48,14 @@ means<-Gpoints(num_point=6, dimension=3, dmin=100, pinit=5)
 covs<-create_param(D=3,K=6, type="cov", covdiag = 100)
 
 
-means<-matrix(c(10,10,10,30,20,20,10,10,40,20,20,10,30,40,40,30,10,30,50,50,50,20,60,10), ncol = 8)
-covs<-array(rep(20*diag(3),8), dim = c(3,3,8))
-weights<-c(0.18,0.12,0.1,0.15,0.1,0.2,0.1,0.05)
+means<-matrix(c(10,10,10,30,20,20,10,10,40,20,20,10,30,40,40,30,10,30,50,50,50,20,60,10,80,20,60), ncol = 9)
+covs<-array(rep(20*diag(3),9), dim = c(3,3,9))
+weights<-c(0.08,0.1,0.12,0.1,0.15,0.1,0.2,0.1,0.05)
 sizek<-1000000
-componente<-sample(1:8, size = sizek, replace = T, prob = weights)
+componente<-sample(1:9, size = sizek, replace = T, prob = weights)
 
 samples<-do.call(rbind,
-                 lapply(1:8,function(k){
+                 lapply(1:9,function(k){
                    mues_k<-MASS::mvrnorm(n = sum(componente==k), means[,k], covs[,,k])
                    cbind(mues_k,k)
                  }
@@ -63,8 +63,8 @@ samples<-do.call(rbind,
 )[sample(sizek),] 
 
 samples_k<-sample_split(samples,1000)
-gridsom<- matrix(c(1,1,1,2,2,1,2,2,3,1,3,2), nrow = 2)
-SOM_res<-lapply(samples_k, \(x) SOM_BASIC(x[,c(1,2,3)],gridsom, cluster = 8, eta = 0.5, sigma0 = 0.5))
+gridsom<- matrix(c(1,1,1,2,1,3,2,1,2,2,2,3,3,1,3,2,3,3), nrow = 2)
+SOM_res<-lapply(samples_k, \(x) SOM_BASIC(x[,c(1,2,3)],gridsom, cluster = 9, eta = 0.5, sigma0 = 0.5))
 centroid<-do.call(rbind,lapply(SOM_res, \(x) x[[1]]))
 
 library(mclust)
