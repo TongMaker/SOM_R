@@ -48,8 +48,8 @@ means<-Gpoints(num_point=6, dimension=3, dmin=100, pinit=5)
 covs<-create_param(D=3,K=6, type="cov", covdiag = 100)
 
 
-means<-matrix(c(10,50,10,60,20,20,80,10,40,20,20,10,30,40,40,30,10,30,50,50,50,40,60,10,70,20,60), ncol = 9)
-covs<-array(rep(10*diag(3),9), dim = c(3,3,9))
+means<-matrix(c(10,50,10,60,20,20,80,10,40,20,20,10,30,40,40,30,10,30,50,50,50,40,60,10,80,20,60), ncol = 9)
+covs<-array(rep(20*diag(3),9), dim = c(3,3,9))
 weights<-c(0.08,0.1,0.12,0.1,0.15,0.1,0.2,0.1,0.05)
 sum(weights)
 sizek<-1000000
@@ -81,16 +81,27 @@ library(mclust)
 
 mclust_est<-mclust::Mclust(centroid, G=9)
 est<-mclust_est$parameters$mean
+mclust_est$parameters
+
+df_mclust<-data.frame(mclust_est$data, K=mclust_est$classification)
+names(df_mclust)<-c("X","Y","Z","K")
+
+plotly::plot_ly(df_mclust, x=~X, y=~Y, z=~Z, color =~K,size=0.001, type = "scatter3d", mode = "markers")
 
 t(matrix(apply(est, 2, mean),ncol = 3))
 
 
 wsorder<-apply((est),2,\(x) which.min(sqrt(rowSums(t(x-(means))^2))))
+est[,order(wsorder)]
+means
 
-as.vector(round(est,4))->mm
+as.vector(round(est[,order(wsorder)],4))->mm
+
+
+
 text<-""
 for(i in 1:length(mm)){
-  if(i%%3==1){text<-paste0(text,"Cluster ",i%/%3+1, " & ", mm[i])}
+  if(i%%3==1){text<-paste0(text,"Weight ",i%/%3+1, " & ", mm[i])}
   else if(i%%3==0){text<-paste0(text, " & ",mm[i], "\\\\\n")}
   else{text<-paste0(text, " & ",mm[i])}
 }
