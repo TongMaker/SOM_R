@@ -98,7 +98,7 @@ means
 as.vector(round(est[,order(wsorder)],4))->mm
 
 
-#w
+
 text<-""
 for(i in 1:length(mm)){
   if(i%%3==1){text<-paste0(text,"Weight ",i%/%3+1, " & ", mm[i])}
