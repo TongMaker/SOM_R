@@ -1,6 +1,5 @@
 library(MASS)
-
-source("/Users/tongzhou/Library/Mobile Documents/com~apple~CloudDocs/Desktop/PHD/RCODE/Aux_Program/Mixture_Parameter_Generator.R", echo=TRUE)
+library(plotly)
 #function to split data
 sample_split<-function(samples, num_split){
   sample_size<-nrow(samples)
@@ -43,9 +42,6 @@ SOM_BASIC<-function(samples, gridsom, cluster, eta, sigma0, weight=NULL){
   list(weight=weight, classification=cbind(samples, ri,i))
 }
 
-
-means<-Gpoints(num_point=6, dimension=3, dmin=100, pinit=5)
-covs<-create_param(D=3,K=6, type="cov", covdiag = 100)
 
 
 means<-matrix(c(10,50,10,60,20,20,80,10,40,20,20,10,30,40,40,30,10,30,50,50,50,40,60,10,80,20,60), ncol = 9)
