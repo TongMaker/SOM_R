@@ -1,7 +1,7 @@
 library(MASS)
 
 source("/Users/tongzhou/Library/Mobile Documents/com~apple~CloudDocs/Desktop/PHD/RCODE/Aux_Program/Mixture_Parameter_Generator.R", echo=TRUE)
-#function to split data
+#function to split data.
 sample_split<-function(samples, num_split){
   sample_size<-nrow(samples)
   size_miniSample<-sample_size/num_split
