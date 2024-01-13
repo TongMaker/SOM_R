@@ -65,7 +65,7 @@ df<-as.data.frame(samples[1:10000,])
 names(df)<-c("X","Y","Z","K")
 df$K<-as.character(df$K)
 
-plotly::plot_ly(df, x=~X, y=~Y, z=~Z, color =~K,size=0.001, type = "scatter3d", mode = "markers",
+plotly::plot_ly(df, x=~X, y=~Y, z=~Z, color =~K, size=0.001, type = "scatter3d", mode = "markers",
                 marker =list(colorscale = 'Set2'))
 
 
@@ -81,8 +81,10 @@ mclust_est$parameters
 
 df_mclust<-data.frame(mclust_est$data, K=mclust_est$classification)
 names(df_mclust)<-c("X","Y","Z","K")
+df_mclust$K<-as.character(df_mclust$K)
 
-plotly::plot_ly(df_mclust, x=~X, y=~Y, z=~Z, color =~K,size=0.001, type = "scatter3d", mode = "markers")
+plotly::plot_ly(df_mclust, x=~X, y=~Y, z=~Z, color =~K,size=0.001, type = "scatter3d", mode = "markers",
+                marker =list(colorscale = 'Set1'))
 
 t(matrix(apply(est, 2, mean),ncol = 3))
 
